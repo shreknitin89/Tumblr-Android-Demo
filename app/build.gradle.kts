@@ -1,6 +1,3 @@
-import com.android.build.gradle.BaseExtension
-import org.gradle.internal.impldep.org.apache.maven.model.Extension
-
 plugins {
     id("com.android.application")
     kotlin("android")
