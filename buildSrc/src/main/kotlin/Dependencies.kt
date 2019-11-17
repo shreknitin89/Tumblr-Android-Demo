@@ -1,7 +1,7 @@
 const val kotlinVersion = "1.3.50"
 
 object BuildPlugins {
-    const val ktLintPlugin = "9.0.0" // https://github.com/JLLeitschuh/ktlint-gradle/releases
+    const val ktLintPlugin = "9.1.1" // https://github.com/JLLeitschuh/ktlint-gradle/releases
     const val androidGradle = "3.5.2" // https://developer.android.com/studio/releases/gradle-plugin
 }
 
@@ -16,8 +16,6 @@ object Android {
 }
 
 object Libs {
-
-    // https://developer.android.com/jetpack/androidx/migrate
     const val appCompat = "1.1.0" // https://mvnrepository.com/artifact/androidx.appcompat/appcompat
     const val androidMaterial = "1.1.0-beta01"
     // https://mvnrepository.com/artifact/com.google.android.material/material
