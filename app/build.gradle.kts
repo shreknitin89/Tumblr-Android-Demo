@@ -20,6 +20,11 @@ android {
         multiDexEnabled = true
         testInstrumentationRunner = Android.testInstrumentationRunner
         vectorDrawables.useSupportLibrary = true
+
+        buildConfigField("String", "CONSUMER_KEY", "\"${Keys.consumerKey}\"")
+        buildConfigField("String", "CONSUMER_SECRET", "\"${Keys.consumerSecret}\"")
+        buildConfigField("String", "TOKEN", "\"${Keys.token}\"")
+        buildConfigField("String", "TOKEN_SECRET", "\"${Keys.tokenSecret}\"")
     }
     buildTypes {
         getByName("release") {
@@ -39,10 +44,34 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
     implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
 
+    // UI core components
     implementation("androidx.appcompat:appcompat:${Libs.appCompat}")
     implementation("androidx.constraintlayout:constraintlayout:${Libs.constraintLayout}")
-
+    implementation("com.google.android.material:material:${Libs.androidMaterial}")
     implementation("androidx.core:core-ktx:${Libs.androidCore}")
+    implementation("androidx.legacy:legacy-support-v4:${Libs.legacySupport}")
+    implementation("androidx.lifecycle:lifecycle-extensions:${Libs.androidLifeCycle}")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Libs.androidLifeCycle}")
+
+    // Tumblr
+    implementation("com.tumblr:jumblr:${Libs.jumblr}")
+
+    // Fragment Navigation
+    implementation("com.ncapdevi:frag-nav:${Libs.fragNav}")
+
+    // RxAndroid
+    implementation("io.reactivex.rxjava2:rxandroid:${Libs.rxAndroid}")
+
+    // Koin for Android
+    implementation("org.koin:koin-android:${Libs.koin}")
+    implementation("org.koin:koin-android-scope:${Libs.koin}")
+    implementation("org.koin:koin-android-viewmodel:${Libs.koin}")
+    implementation("org.koin:koin-android-ext:${Libs.koin}")
+
+    // Glide for Image Loading
+    kapt("com.github.bumptech.glide:compiler:${Libs.glide}")
+    implementation("com.github.bumptech.glide:glide:${Libs.glide}")
+    implementation("com.github.bumptech.glide:okhttp3-integration:${Libs.glide}")
 
     // Unit Tests
     testImplementation("junit:junit:${Libs.junit}")

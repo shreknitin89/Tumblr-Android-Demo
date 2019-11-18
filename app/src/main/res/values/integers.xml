@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <integer name="anim_duration_short">300</integer>
+    <integer name="anim_duration_medium" tools:ignore="UnusedResources">500</integer>
+    <integer name="anim_duration_large" tools:ignore="UnusedResources">800</integer>
+</resources>

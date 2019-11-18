@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Tumblr-Android-Demo</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="following">Following</string>
+    <string name="likes">Likes</string>
+    <string name="post_image">Image for post</string>
 </resources>

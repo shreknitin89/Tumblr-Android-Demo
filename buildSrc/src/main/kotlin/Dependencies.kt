@@ -15,6 +15,13 @@ object Android {
     const val testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 }
 
+object Keys {
+    const val consumerKey = "lsnTmAkmV50oeGg7oVaOGzg48dmBGr5yS8eViGXxmYTtKdMMyv"
+    const val consumerSecret = "Myw99AKRzK3HdrArDuAGOIKLLHR9I9ucOhTkh7YqLjfmVjDMrr"
+    const val token = "TyKAE4fM1P4vkGTQHa6dD2yAoq77o4chmG4evr3nC7f7vIdR78"
+    const val tokenSecret = "SwXwBkwhuJsoOMI8gLVQiOd7yPbSfF1AMYdrPE5ZOgVJyAEImn"
+}
+
 object Libs {
     const val appCompat = "1.1.0" // https://mvnrepository.com/artifact/androidx.appcompat/appcompat
     const val androidMaterial = "1.1.0-beta01"
@@ -22,7 +29,8 @@ object Libs {
     const val recyclerView = "1.1.0-beta05"
     // https://mvnrepository.com/artifact/androidx.recyclerview/recyclerview
     const val cardView = "1.0.0" // https://mvnrepository.com/artifact/androidx.cardview/cardview
-    const val androidLifeCycle = "2.2.0-beta01"
+    const val legacySupport = "1.0.0" // https://mvnrepository.com/artifact/androidx.legacy/legacy-support-v4
+    const val androidLifeCycle = "2.1.0"
     // https://mvnrepository.com/artifact/androidx.lifecycle/lifecycle-extensions
     const val lifeCycleSavedState = "1.0.0-beta01"
     // https://mvnrepository.com/artifact/androidx.lifecycle/lifecycle-viewmodel-savedstate
@@ -33,13 +41,14 @@ object Libs {
     const val legacySupportCore = "1.0.0"
     const val constraintLayout = "2.0.0-beta2"
     // https://mvnrepository.com/artifact/androidx.constraintlayout/constraintlayout
+    const val jumblr = "0.0.13" // https://github.com/tumblr/jumblr/releases
     const val multidex = "2.0.1" // https://mvnrepository.com/artifact/androidx.multidex/multidex
     const val okHttp = "4.2.2" // https://github.com/square/okhttp/releases
     const val retrofit = "2.6.1" // https://github.com/square/retrofit/releases
     const val glide = "4.10.0" // https://github.com/bumptech/glide/releases
     const val jodaTime = "2.10.4" // https://github.com/JodaOrg/joda-time/releases
     const val jodaConvert = "2.2.1" // http://www.joda.org/joda-convert/changes-report.html
-    const val dagger = "2.24" // https://github.com/google/dagger/releases
+    const val koin = "2.0.1" // https://github.com/InsertKoinIO/koin/releases
     const val timberLog = "4.7.1" // https://github.com/JakeWharton/timber/releases
     const val fragNav = "3.3.0" // https://github.com/ncapdevi/FragNav/releases
     const val rxAndroid = "2.1.1" // https://github.com/ReactiveX/RxAndroid/releases
