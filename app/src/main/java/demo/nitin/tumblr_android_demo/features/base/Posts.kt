@@ -1,4 +1,4 @@
-package demo.nitin.tumblr_android_demo.features.models
+package demo.nitin.tumblr_android_demo.features.base
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
