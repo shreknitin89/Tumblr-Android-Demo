@@ -5,7 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Posts(
-    val uiPosts: List<UiPost>
+    val uiPosts: ArrayList<UiPost>
 ) : Parcelable
 
 @Parcelize

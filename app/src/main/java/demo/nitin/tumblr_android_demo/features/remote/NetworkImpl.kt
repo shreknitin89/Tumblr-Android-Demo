@@ -13,12 +13,12 @@ class NetworkImpl constructor(private val client: JumblrClient) : Network {
             client.userDashboard()?.let { dashboard ->
                 val posts = dashboard.map {
                     val blogName = it?.blogName ?: ""
-                    val title = it?.sourceTitle ?: ""
+                    val title = it?.slug ?: ""
                     val description = (it as? TextPost)?.body ?: ""
                     val photo = (it as? PhotoPost)?.photos?.firstOrNull()?.originalSize?.url ?: ""
                     val tags = it?.tags?.joinToString() ?: ""
                     return@map UiPost(blogName, title, description, photo, tags)
-                }
+                } as ArrayList
                 emitter.onSuccess(Posts(posts))
             } ?: run {
                 emitter.tryOnError(Throwable("Dashboards posts empty"))

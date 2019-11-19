@@ -10,11 +10,11 @@ import io.reactivex.Single
 class DashboardRepoImpl constructor(private val network: Network) : DashboardRepo {
     override fun getPosts(offset: Int): Flowable<Any> {
         val cachedData = Single.fromCallable {
-            return@fromCallable Cache[Posts::class.fullyTypedName()]
+            return@fromCallable Cache[Posts::class.fullyTypedName()] as? Posts ?: Posts(ArrayList())
         }
         val networkData = network.getPosts(offset).doOnSuccess {
             it?.let { posts ->
-                Cache.put(Posts::class.fullyTypedName(), posts)
+                (Cache[Posts::class.fullyTypedName()] as? Posts)?.uiPosts?.addAll(posts.uiPosts)
             }
         }
 
