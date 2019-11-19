@@ -1,4 +1,4 @@
-package demo.nitin.tumblr_android_demo.ui
+package demo.nitin.tumblr_android_demo.features.ui
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

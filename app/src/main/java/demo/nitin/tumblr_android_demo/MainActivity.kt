@@ -1,10 +1,10 @@
-package demo.nitin.tumblr_android_demo.ui
+package demo.nitin.tumblr_android_demo
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.ncapdevi.fragnav.FragNavController
-import demo.nitin.tumblr_android_demo.R
+import demo.nitin.tumblr_android_demo.features.ui.DashboardFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener {

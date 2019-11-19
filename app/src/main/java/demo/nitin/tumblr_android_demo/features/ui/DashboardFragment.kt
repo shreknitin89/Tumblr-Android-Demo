@@ -1,4 +1,4 @@
-package demo.nitin.tumblr_android_demo.ui
+package demo.nitin.tumblr_android_demo.features.ui
 
 import android.os.Bundle
 import android.util.Log
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import demo.nitin.tumblr_android_demo.R
 import kotlinx.android.synthetic.main.dashboard_fragment.*
@@ -30,7 +31,10 @@ class DashboardFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        // TODO: Use the ViewModel
+        dashboardViewModel.getDashboardPosts(20).observe(this, Observer {
+            val data = it
+            Log.d("Data", data?.message ?: "")
+        })
     }
 
     override fun onResume() {

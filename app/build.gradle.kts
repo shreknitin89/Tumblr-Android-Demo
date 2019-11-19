@@ -35,6 +35,11 @@ android {
             )
         }
     }
+    androidExtensions.isExperimental = true
+    sourceSets {
+        val kotlinAdditionalSourceSets = project.file("src/main/kotlin")
+        findByName("main")?.java?.srcDirs(kotlinAdditionalSourceSets)
+    }
 }
 
 dependencies {
