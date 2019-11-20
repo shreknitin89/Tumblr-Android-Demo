@@ -5,4 +5,5 @@
     <string name="likes">Likes</string>
     <string name="post_image">Image for post</string>
     <string name="loading_data">Loading data</string>
+    <string name="tags">TAGS: %s</string>
 </resources>
