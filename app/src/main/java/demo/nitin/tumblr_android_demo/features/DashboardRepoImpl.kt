@@ -19,4 +19,8 @@ class DashboardRepoImpl constructor(private val network: Network) : DashboardRep
 
         return Single.concat(cachedData, networkData).filter { it.uiPosts.isNotEmpty() }.first(Posts(ArrayList()))
     }
+
+    override fun getNewPosts(): Single<Posts> {
+        return network.getPosts(20)
+    }
 }

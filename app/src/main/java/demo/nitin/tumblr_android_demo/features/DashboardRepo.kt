@@ -7,4 +7,5 @@ import io.reactivex.Single
 
 interface DashboardRepo {
     fun getPosts(offset: Int): Single<Posts>
+    fun getNewPosts(): Single<Posts>
 }

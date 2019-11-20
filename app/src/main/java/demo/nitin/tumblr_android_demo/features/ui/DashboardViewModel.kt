@@ -20,4 +20,8 @@ class DashboardViewModel(private val repository: DashboardRepo) : ViewModel() {
     fun getDashboardPosts(offset: Int): LiveData<UiState<Posts>> {
         return repository.getPosts(offset).performOnComputation().toLiveData(compositeDisposable)
     }
+
+    fun getNewDashboardPosts(offset: Int): LiveData<UiState<Posts>> {
+        return repository.getPosts(offset).performOnComputation().toLiveData(compositeDisposable)
+    }
 }

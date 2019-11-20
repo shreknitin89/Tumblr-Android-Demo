@@ -34,18 +34,25 @@ class DashboardFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        layoutManager = LinearLayoutManager(this.requireActivity())
+        postsAdapter = PostsAdapter(this, Posts(ArrayList()))
+        post_list?.layoutManager = layoutManager
+        post_list?.visibility = View.VISIBLE
+        post_list?.hasFixedSize()
+        post_list?.adapter = postsAdapter
+
         dashboardViewModel.getDashboardPosts(20).observe(this, Observer {
             when (it) {
                 is UiState.Loading -> {
-                    progress_bar?.visibility = View.VISIBLE
+                    // progress_bar?.visibility = View.VISIBLE
                 }
                 is UiState.Error -> {
-                    progress_bar?.visibility = View.GONE
+                    // progress_bar?.visibility = View.GONE
                     Toast.makeText(this.requireActivity(), it.message ?: "Error loading data", Toast.LENGTH_SHORT)
                         .show()
                 }
                 is UiState.Success -> {
-                    progress_bar?.visibility = View.GONE
+                    // progress_bar?.visibility = View.GONE
                     it.data?.let { posts -> updatePosts(posts) }
                 }
             }
@@ -60,10 +67,6 @@ class DashboardFragment : Fragment() {
     }
 
     private fun updatePosts(posts: Posts) {
-        layoutManager = LinearLayoutManager(activity)
-        post_list?.layoutManager = layoutManager
-        post_list?.hasFixedSize()
-        postsAdapter = PostsAdapter(this, posts)
-        post_list?.adapter = postsAdapter
+        postsAdapter.setNewData(posts)
     }
 }
