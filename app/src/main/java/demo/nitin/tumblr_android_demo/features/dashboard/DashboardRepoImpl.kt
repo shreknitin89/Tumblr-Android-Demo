@@ -13,6 +13,9 @@ class DashboardRepoImpl constructor(private val network: Network) : DashboardRep
         }
         val networkData = network.getPosts().doOnSuccess {
             it?.let { posts ->
+                if ((Cache[Posts::class.fullyTypedName()] as? Posts) == null) {
+                    Cache.put(Posts::class.fullyTypedName(), Posts(ArrayList()))
+                }
                 (Cache[Posts::class.fullyTypedName()] as? Posts)?.uiPosts?.addAll(posts.uiPosts)
             }
         }

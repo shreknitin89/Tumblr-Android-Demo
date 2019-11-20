@@ -18,6 +18,9 @@ class LikesRepoImpl constructor(private val network: Network) : LikesRepo {
         }
         val networkData = network.getUserLikes().doOnSuccess {
             it?.let { posts ->
+                if ((Cache[Likes::class.fullyTypedName()] as? Likes) == null) {
+                    Cache.put(Likes::class.fullyTypedName(), Likes(ArrayList()))
+                }
                 (Cache[Likes::class.fullyTypedName()] as? Likes)?.uiPosts?.addAll(posts.uiPosts)
             }
         }
