@@ -1,12 +1,20 @@
-package demo.nitin.tumblr_android_demo
+package demo.nitin.tumblr_android_demo.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.ncapdevi.fragnav.FragNavController
-import demo.nitin.tumblr_android_demo.features.ui.DashboardFragment
+import demo.nitin.tumblr_android_demo.R
+import demo.nitin.tumblr_android_demo.features.dashboard.DashboardFragment
+import demo.nitin.tumblr_android_demo.features.following.FollowingFragment
+import demo.nitin.tumblr_android_demo.features.likes.LikesFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
+/**
+ * Base activity defining the UI components and fragment navigation
+ * @author - Nitin Dasari
+ * @since - 11/17/2019
+ */
 class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener {
 
     companion object {
@@ -25,8 +33,8 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
         // return the root fragment for each tab
         return when (index) {
             DASHBOARD -> DashboardFragment.newInstance()
-            //     FOLLOWING -> //
-            //     LIKES -> //
+            FOLLOWING -> FollowingFragment.newInstance()
+            LIKES -> LikesFragment.newInstance()
             else -> DashboardFragment.newInstance()
         }
     }
@@ -36,13 +44,12 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
         setContentView(R.layout.activity_main)
 
         fragNavController =
-            FragNavController(
-                supportFragmentManager,
-                R.id.content_container
-            ).apply {
+            FragNavController(supportFragmentManager, R.id.content_container).apply {
                 rootFragmentListener = this@MainActivity
                 initialize(DASHBOARD, savedInstanceState)
             }
+
+        initNavigationBar()
     }
 
     private fun initNavigationBar() {

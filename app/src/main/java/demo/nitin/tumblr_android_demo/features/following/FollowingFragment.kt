@@ -1,4 +1,4 @@
-package demo.nitin.tumblr_android_demo.features.ui
+package demo.nitin.tumblr_android_demo.features.following
 
 import android.os.Bundle
 import android.util.Log
@@ -10,18 +10,19 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import demo.nitin.tumblr_android_demo.R
-import demo.nitin.tumblr_android_demo.features.base.Posts
+import demo.nitin.tumblr_android_demo.base.Posts
+import demo.nitin.tumblr_android_demo.base.PostsAdapter
 import demo.nitin.tumblr_android_demo.utils.UiState
 import kotlinx.android.synthetic.main.dashboard_fragment.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class DashboardFragment : Fragment() {
+class FollowingFragment : Fragment() {
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var postsAdapter: PostsAdapter
-    private val dashboardViewModel: DashboardViewModel by viewModel()
+    private val blogsViewModel: FollowingViewModel by viewModel()
 
     companion object {
-        fun newInstance() = DashboardFragment()
+        fun newInstance() = FollowingFragment()
     }
 
     override fun onCreateView(
@@ -35,25 +36,26 @@ class DashboardFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         layoutManager = LinearLayoutManager(this.requireActivity())
-        postsAdapter = PostsAdapter(this, Posts(ArrayList()))
+        postsAdapter = PostsAdapter(this, ArrayList())
         post_list?.layoutManager = layoutManager
         post_list?.visibility = View.VISIBLE
         post_list?.hasFixedSize()
         post_list?.adapter = postsAdapter
 
-        dashboardViewModel.getDashboardPosts(20).observe(this, Observer {
+        blogsViewModel.getUserFollowingBlogs().observe(this, Observer {
             when (it) {
                 is UiState.Loading -> {
-                    // progress_bar?.visibility = View.VISIBLE
+                    // Do nothing -> Ideally show a progress
                 }
                 is UiState.Error -> {
-                    // progress_bar?.visibility = View.GONE
-                    Toast.makeText(this.requireActivity(), it.message ?: "Error loading data", Toast.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(
+                        this.requireActivity(),
+                        it.message ?: "Error loading data",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 is UiState.Success -> {
-                    // progress_bar?.visibility = View.GONE
-                    it.data?.let { posts -> updatePosts(posts) }
+                    // it.data?.let { posts -> updatePosts(posts) }
                 }
             }
         })
@@ -67,6 +69,6 @@ class DashboardFragment : Fragment() {
     }
 
     private fun updatePosts(posts: Posts) {
-        postsAdapter.setNewData(posts)
+        postsAdapter.setNewData(posts.uiPosts)
     }
 }

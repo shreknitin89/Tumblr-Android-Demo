@@ -58,6 +58,11 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-extensions:${Libs.androidLifeCycle}")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Libs.androidLifeCycle}")
 
+    // Glide for Image Loading
+    kapt("com.github.bumptech.glide:compiler:${Libs.glide}")
+    implementation("com.github.bumptech.glide:glide:${Libs.glide}")
+    implementation("com.github.bumptech.glide:okhttp3-integration:${Libs.glide}")
+
     // Tumblr
     implementation("com.tumblr:jumblr:${Libs.jumblr}")
 

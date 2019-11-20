@@ -1,23 +1,22 @@
-package demo.nitin.tumblr_android_demo.features.ui
+package demo.nitin.tumblr_android_demo.base
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import demo.nitin.tumblr_android_demo.R
-import demo.nitin.tumblr_android_demo.features.base.PostViewHolder
-import demo.nitin.tumblr_android_demo.features.base.Posts
 
-class PostsAdapter(private val fragment: DashboardFragment, private val posts: Posts) :
+class PostsAdapter(private val fragment: Fragment, var uiPosts: ArrayList<UiPost>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var uiPosts = posts.uiPosts
 
-    fun setNewData(posts: Posts) {
-        uiPosts = posts.uiPosts
+    fun setNewData(uiPost: ArrayList<UiPost>) {
+        uiPosts = uiPost
         notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view = LayoutInflater.from(fragment.requireActivity()).inflate(R.layout.post_layout, parent, false)
+        val view = LayoutInflater.from(fragment.requireActivity())
+            .inflate(R.layout.post_layout, parent, false)
         return PostViewHolder(view)
     }
 
@@ -28,7 +27,7 @@ class PostsAdapter(private val fragment: DashboardFragment, private val posts: P
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val uiPost = uiPosts.getOrNull(position)
         uiPost?.let {
-            (holder as? PostViewHolder)?.setPosts(uiPost)
+            (holder as? PostViewHolder)?.setPosts(uiPost, fragment)
         }
     }
 }
