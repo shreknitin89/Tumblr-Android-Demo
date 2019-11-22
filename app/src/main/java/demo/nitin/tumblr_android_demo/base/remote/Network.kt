@@ -6,6 +6,6 @@ import io.reactivex.Single
 
 interface Network {
     fun getPosts(offset: Int): Single<Posts>
-    fun getBlogs(): Single<Blogs>
+    fun getBlogs(offset: Int): Single<Blogs>
     fun getUserLikes(offset: Int): Single<Posts>
 }

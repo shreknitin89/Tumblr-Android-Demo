@@ -4,6 +4,6 @@ import demo.nitin.tumblr_android_demo.base.Blogs
 import io.reactivex.Single
 
 interface FollowingRepo {
-    fun getBlogs(): Single<Blogs>
-    fun getNewBlogs(): Single<Blogs>
+    fun getBlogs(offset: Int): Single<Blogs>
+    fun getNewBlogs(offset: Int): Single<Blogs>
 }

@@ -1,7 +1,6 @@
 package demo.nitin.tumblr_android_demo.features.following
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,15 +9,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import demo.nitin.tumblr_android_demo.R
-import demo.nitin.tumblr_android_demo.base.Posts
-import demo.nitin.tumblr_android_demo.base.PostsAdapter
+import demo.nitin.tumblr_android_demo.base.Blogs
 import demo.nitin.tumblr_android_demo.utils.UiState
 import kotlinx.android.synthetic.main.dashboard_fragment.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class FollowingFragment : Fragment() {
     private lateinit var layoutManager: LinearLayoutManager
-    private lateinit var postsAdapter: PostsAdapter
+    private lateinit var blogsAdapter: BlogsAdapter
     private val blogsViewModel: FollowingViewModel by viewModel()
 
     companion object {
@@ -36,13 +34,13 @@ class FollowingFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         layoutManager = LinearLayoutManager(this.requireActivity())
-        // postsAdapter = PostsAdapter(this, ArrayList())
+        blogsAdapter = BlogsAdapter(this, blogsViewModel, ArrayList())
         post_list?.layoutManager = layoutManager
         post_list?.visibility = View.VISIBLE
         post_list?.hasFixedSize()
-        // post_list?.adapter = postsAdapter
+        post_list?.adapter = blogsAdapter
 
-        blogsViewModel.getUserFollowingBlogs().observe(this, Observer {
+        blogsViewModel.getUserFollowingBlogs(0).observe(this, Observer {
             when (it) {
                 is UiState.Loading -> {
                     // Do nothing -> Ideally show a progress
@@ -55,17 +53,13 @@ class FollowingFragment : Fragment() {
                     ).show()
                 }
                 is UiState.Success -> {
-                    // it.data?.let { posts -> updatePosts(posts) }
+                    it.data?.let { blogs -> updatePosts(blogs) }
                 }
             }
         })
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
-
-    private fun updatePosts(posts: Posts) {
-        postsAdapter.setNewData(posts.uiPosts)
+    private fun updatePosts(blogs: Blogs) {
+        blogsAdapter.setNewData(blogs.uiBlogs)
     }
 }

@@ -6,4 +6,7 @@
     <string name="post_image">Image for post</string>
     <string name="loading_data">Loading data</string>
     <string name="tags">TAGS: %s</string>
+    <string name="posts_count"><b>Posts:</b> %s</string>
+    <string name="likes_count"><b>Likes:</b> %s</string>
+    <string name="followers_count"><b>Followers:</b> %s</string>
 </resources>

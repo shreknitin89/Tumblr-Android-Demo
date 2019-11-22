@@ -41,6 +41,7 @@ data class UiBlog(
     val name: String,
     val title: String,
     val description: String,
-    val posts: Int = 0,
-    val likes: Int = 0, val followers: Int = 0
+    val posts: Int,
+    val likes: Int,
+    val followers: Int
 ) : Parcelable

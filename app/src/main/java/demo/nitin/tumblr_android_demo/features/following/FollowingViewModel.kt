@@ -16,11 +16,11 @@ class FollowingViewModel constructor(private val repository: FollowingRepo) : Vi
         compositeDisposable.clear()
     }
 
-    fun getUserFollowingBlogs(): LiveData<UiState<Blogs>> {
-        return repository.getBlogs().performOnComputation().toLiveData(compositeDisposable)
+    fun getUserFollowingBlogs(offset: Int): LiveData<UiState<Blogs>> {
+        return repository.getBlogs(offset).performOnComputation().toLiveData(compositeDisposable)
     }
 
-    fun getNewDashboardPosts(): LiveData<UiState<Blogs>> {
-        return repository.getNewBlogs().performOnComputation().toLiveData(compositeDisposable)
+    fun getNewBlogs(offset: Int): LiveData<UiState<Blogs>> {
+        return repository.getNewBlogs(offset).performOnComputation().toLiveData(compositeDisposable)
     }
 }

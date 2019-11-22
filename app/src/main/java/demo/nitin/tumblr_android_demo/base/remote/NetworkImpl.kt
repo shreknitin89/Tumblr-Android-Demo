@@ -37,11 +37,12 @@ class NetworkImpl constructor(private val client: JumblrClient) : Network {
         }
     }
 
-    override fun getBlogs(): Single<Blogs> {
-
+    override fun getBlogs(offset: Int): Single<Blogs> {
         return Single.create { emitter ->
             try {
-                client.userFollowing()?.let { blogs ->
+                val map = HashMap<String, Int>()
+                map["offset"] = offset
+                client.userFollowing(map)?.let { blogs ->
                     val uiBlogs = blogs.map {
                         UiBlog(
                             it.name,
