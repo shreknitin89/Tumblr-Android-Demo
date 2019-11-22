@@ -8,10 +8,19 @@ import kotlinx.android.parcel.Parcelize
  * @author - Nitin Dasari
  * @since - 11/19/2019
  */
-@Parcelize
-data class Posts(
+interface Posts : Parcelable {
     val uiPosts: ArrayList<UiPost>
-) : Parcelable
+}
+
+@Parcelize
+data class Dashboard(
+    override val uiPosts: ArrayList<UiPost>
+) : Posts
+
+@Parcelize
+data class Likes(
+    override val uiPosts: ArrayList<UiPost>
+) : Posts
 
 @Parcelize
 data class UiPost(
@@ -20,11 +29,6 @@ data class UiPost(
     val description: String,
     val photo: String,
     val tags: String
-) : Parcelable
-
-@Parcelize
-data class Likes(
-    val uiPosts: ArrayList<UiPost>
 ) : Parcelable
 
 @Parcelize

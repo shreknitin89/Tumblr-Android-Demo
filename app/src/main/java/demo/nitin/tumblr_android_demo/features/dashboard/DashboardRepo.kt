@@ -4,6 +4,6 @@ import demo.nitin.tumblr_android_demo.base.Posts
 import io.reactivex.Single
 
 interface DashboardRepo {
-    fun getPosts(): Single<Posts>
-    fun getNewPosts(): Single<Posts>
+    fun getPosts(offset: Int): Single<Posts>
+    fun getNewPosts(offset: Int): Single<Posts>
 }

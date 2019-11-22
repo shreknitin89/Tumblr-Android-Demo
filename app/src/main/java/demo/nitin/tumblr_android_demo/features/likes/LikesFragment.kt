@@ -1,7 +1,6 @@
 package demo.nitin.tumblr_android_demo.features.likes
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,15 +9,19 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import demo.nitin.tumblr_android_demo.R
-import demo.nitin.tumblr_android_demo.base.Likes
+import demo.nitin.tumblr_android_demo.base.Posts
 import demo.nitin.tumblr_android_demo.base.PostsAdapter
+import demo.nitin.tumblr_android_demo.base.UiPost
+import demo.nitin.tumblr_android_demo.utils.PostsStreamFactory
 import demo.nitin.tumblr_android_demo.utils.UiState
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.dashboard_fragment.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class LikesFragment : Fragment() {
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var postsAdapter: PostsAdapter
+    private val disposable = CompositeDisposable()
     private val likesViewModel: LikesViewModel by viewModel()
 
     companion object {
@@ -36,42 +39,44 @@ class LikesFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         layoutManager = LinearLayoutManager(this.requireActivity())
-        postsAdapter = PostsAdapter(this, ArrayList())
+        postsAdapter = PostsAdapter(this, likesViewModel, ArrayList())
         post_list?.layoutManager = layoutManager
         post_list?.visibility = View.VISIBLE
         post_list?.hasFixedSize()
         post_list?.adapter = postsAdapter
 
-        likesViewModel.getUserLikes().observe(this, Observer {
-            when (it) {
-                is UiState.Loading -> {
-                    // progress_bar?.visibility = View.VISIBLE
-                }
-                is UiState.Error -> {
-                    // progress_bar?.visibility = View.GONE
-                    Toast.makeText(
-                        this.requireActivity(),
-                        it.message ?: "Error loading data",
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
-                }
-                is UiState.Success -> {
-                    // progress_bar?.visibility = View.GONE
-                    it.data?.let { likes -> updateLikes(likes) }
-                }
-            }
+        likesViewModel.getUserLikes(0).observe(this, Observer {
+            refreshData(it)
         })
     }
 
     override fun onResume() {
         super.onResume()
-        swipe_layout?.setOnRefreshListener {
-            Log.d(this::class.qualifiedName, "onRefresh called from SwipeRefreshLayout")
+
+        disposable.add(PostsStreamFactory.postsStream.subscribe {
+            updateLikes(it)
+        })
+    }
+
+    private fun refreshData(posts: UiState<Posts>) {
+        when (posts) {
+            is UiState.Loading -> {
+                // Do nothing -> Ideally show a progress
+            }
+            is UiState.Error -> {
+                Toast.makeText(
+                    this.requireActivity(),
+                    posts.message ?: "Error loading data",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            is UiState.Success -> {
+                posts.data?.let { updateLikes(it.uiPosts) }
+            }
         }
     }
 
-    private fun updateLikes(likes: Likes) {
-        postsAdapter.setNewData(likes.uiPosts)
+    private fun updateLikes(likes: ArrayList<UiPost>) {
+        postsAdapter.setNewData(likes)
     }
 }

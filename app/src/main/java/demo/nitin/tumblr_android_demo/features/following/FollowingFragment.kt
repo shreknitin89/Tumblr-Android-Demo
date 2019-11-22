@@ -36,11 +36,11 @@ class FollowingFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         layoutManager = LinearLayoutManager(this.requireActivity())
-        postsAdapter = PostsAdapter(this, ArrayList())
+        // postsAdapter = PostsAdapter(this, ArrayList())
         post_list?.layoutManager = layoutManager
         post_list?.visibility = View.VISIBLE
         post_list?.hasFixedSize()
-        post_list?.adapter = postsAdapter
+        // post_list?.adapter = postsAdapter
 
         blogsViewModel.getUserFollowingBlogs().observe(this, Observer {
             when (it) {
@@ -63,9 +63,6 @@ class FollowingFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        swipe_layout?.setOnRefreshListener {
-            Log.d(this::class.qualifiedName, "onRefresh called from SwipeRefreshLayout")
-        }
     }
 
     private fun updatePosts(posts: Posts) {
