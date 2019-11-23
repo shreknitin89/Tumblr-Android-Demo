@@ -54,8 +54,8 @@ class BlogPostsFragment : Fragment() {
         post_list?.adapter = postsAdapter
 
         blog?.let {
-            followingViewModel.getBlogPosts(0, it).observe(this, Observer {
-                refreshData(it)
+            followingViewModel.getBlogPosts(0, it).observe(this, Observer {state ->
+                refreshData(state)
             })
         }
     }
@@ -92,6 +92,6 @@ class BlogPostsFragment : Fragment() {
     }
 
     private fun updatePosts(posts: ArrayList<UiPost>) {
-        postsAdapter.setNewData(posts)
+        postsAdapter.setNewData(posts, blog)
     }
 }

@@ -16,12 +16,15 @@ class PostsAdapter(
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    private var blog: UiBlog? = null
+
     companion object {
         const val POST = 1
         const val PROGRESS = 2
     }
 
-    fun setNewData(uiPost: ArrayList<UiPost>) {
+    fun setNewData(uiPost: ArrayList<UiPost>, uiBlog: UiBlog? = null) {
+        blog = uiBlog
         val oldSize = uiPosts.size
         uiPosts.addAll(uiPost)
         val newSize = uiPosts.size
@@ -66,7 +69,7 @@ class PostsAdapter(
         LayoutContainer {
         fun bind() {
             progressbar?.visibility = View.VISIBLE
-            viewModel.getNewPosts(uiPosts.size)
+            viewModel.getNewPosts(uiPosts.size, blog)
         }
     }
 }

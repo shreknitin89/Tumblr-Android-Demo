@@ -52,6 +52,14 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
         initNavigationBar()
     }
 
+    override fun onBackPressed() {
+        if(!fragNavController.isRootFragment) {
+            popFragment()
+        } else {
+            super.onBackPressed()
+        }
+    }
+
     fun pushFragment(fragment: Fragment) {
         fragNavController.pushFragment(fragment)
     }
