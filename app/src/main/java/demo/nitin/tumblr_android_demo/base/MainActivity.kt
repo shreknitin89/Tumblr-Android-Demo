@@ -52,6 +52,14 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
         initNavigationBar()
     }
 
+    fun pushFragment(fragment: Fragment) {
+        fragNavController.pushFragment(fragment)
+    }
+
+    fun popFragment() {
+        fragNavController.popFragment()
+    }
+
     private fun initNavigationBar() {
         navigation_bar?.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {

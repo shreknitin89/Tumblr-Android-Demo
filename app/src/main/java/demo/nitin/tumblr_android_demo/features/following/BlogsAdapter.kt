@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import demo.nitin.tumblr_android_demo.R
+import demo.nitin.tumblr_android_demo.base.MainActivity
 import demo.nitin.tumblr_android_demo.base.UiBlog
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.blog_layout.*
@@ -67,6 +68,7 @@ class BlogsAdapter(
     private inner class BlogViewHolder(override val containerView: View) :
         RecyclerView.ViewHolder(containerView),
         LayoutContainer {
+
         fun bind(blog: UiBlog) {
             blog_name?.text = blog.name
             blog_title?.text = blog.title
@@ -81,6 +83,11 @@ class BlogsAdapter(
                     fragment.getString(R.string.followers_count),
                     blog.followers
                 )
+
+            blog_row?.setOnClickListener {
+                // push fragment
+                (fragment.requireActivity() as? MainActivity)?.pushFragment(BlogPostsFragment.newInstance(blog))
+            }
         }
     }
 

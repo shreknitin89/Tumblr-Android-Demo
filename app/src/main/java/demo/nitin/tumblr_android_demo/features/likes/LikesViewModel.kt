@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import demo.nitin.tumblr_android_demo.base.Posts
 import demo.nitin.tumblr_android_demo.base.PostsViewModel
+import demo.nitin.tumblr_android_demo.base.UiBlog
 import demo.nitin.tumblr_android_demo.extensions.performOnComputation
 import demo.nitin.tumblr_android_demo.extensions.toLiveData
 import demo.nitin.tumblr_android_demo.utils.PostsStreamFactory
@@ -14,7 +15,7 @@ class LikesViewModel(private val repository: LikesRepo) : PostsViewModel, ViewMo
 
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
-    override fun getNewPosts(offset: Int) {
+    override fun getNewPosts(offset: Int, blog: UiBlog?) {
         compositeDisposable.add(repository.getNewLikes(offset).performOnComputation().subscribe { posts ->
             PostsStreamFactory.postFetchSuccess(posts.uiPosts)
         })
@@ -28,9 +29,5 @@ class LikesViewModel(private val repository: LikesRepo) : PostsViewModel, ViewMo
     fun getUserLikes(offset: Int): LiveData<UiState<Posts>> {
         return repository.getUserLikes(offset).performOnComputation()
             .toLiveData(compositeDisposable)
-    }
-
-    fun getNewLikedPosts(offset: Int): LiveData<UiState<Posts>> {
-        return repository.getNewLikes(offset).performOnComputation().toLiveData(compositeDisposable)
     }
 }

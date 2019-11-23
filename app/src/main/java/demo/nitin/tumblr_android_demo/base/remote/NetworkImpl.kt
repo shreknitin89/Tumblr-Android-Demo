@@ -10,6 +10,9 @@ import demo.nitin.tumblr_android_demo.base.Posts
 import demo.nitin.tumblr_android_demo.base.UiBlog
 import demo.nitin.tumblr_android_demo.base.UiPost
 import io.reactivex.Single
+import com.tumblr.jumblr.types.Blog
+
+
 
 class NetworkImpl constructor(private val client: JumblrClient) : Network {
     override fun getPosts(offset: Int): Single<Posts> {
@@ -81,6 +84,32 @@ class NetworkImpl constructor(private val client: JumblrClient) : Network {
                     emitter.onSuccess(Likes(posts))
                 } ?: run {
                     emitter.tryOnError(Throwable("Liked posts empty"))
+                }
+            } catch (exception: Exception) {
+                emitter.tryOnError(exception)
+            }
+        }
+    }
+
+    override fun getBlogPosts(offset: Int, blog: UiBlog) : Single<Posts>{
+        return Single.create { emitter ->
+            val map = HashMap<String, Int>()
+            map["offset"] = offset
+            try {
+                val blogInfo = client.blogInfo(blog.name)
+                blogInfo.posts(map)?.let { dashboard ->
+                    val posts = dashboard.map {
+                        val blogName = it?.blogName ?: ""
+                        val title = it?.slug ?: ""
+                        val description = (it as? TextPost)?.body ?: ""
+                        val photo =
+                            (it as? PhotoPost)?.photos?.firstOrNull()?.originalSize?.url ?: ""
+                        val tags = it?.tags?.joinToString() ?: ""
+                        return@map UiPost(blogName, title, description, photo, tags)
+                    } as? ArrayList ?: ArrayList()
+                    emitter.onSuccess(Dashboard(posts))
+                } ?: run {
+                    emitter.tryOnError(Throwable("Dashboards posts empty"))
                 }
             } catch (exception: Exception) {
                 emitter.tryOnError(exception)

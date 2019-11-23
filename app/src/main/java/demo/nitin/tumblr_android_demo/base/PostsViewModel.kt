@@ -8,5 +8,5 @@ package demo.nitin.tumblr_android_demo.base
  * @since - 11/20/2019
  */
 interface PostsViewModel {
-    fun getNewPosts(offset: Int)
+    fun getNewPosts(offset: Int, blog: UiBlog? = null)
 }
