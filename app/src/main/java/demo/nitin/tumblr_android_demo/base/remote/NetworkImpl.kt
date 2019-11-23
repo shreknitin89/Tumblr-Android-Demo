@@ -10,9 +10,6 @@ import demo.nitin.tumblr_android_demo.base.Posts
 import demo.nitin.tumblr_android_demo.base.UiBlog
 import demo.nitin.tumblr_android_demo.base.UiPost
 import io.reactivex.Single
-import com.tumblr.jumblr.types.Blog
-
-
 
 class NetworkImpl constructor(private val client: JumblrClient) : Network {
     override fun getPosts(offset: Int): Single<Posts> {
@@ -91,7 +88,7 @@ class NetworkImpl constructor(private val client: JumblrClient) : Network {
         }
     }
 
-    override fun getBlogPosts(offset: Int, blog: UiBlog) : Single<Posts>{
+    override fun getBlogPosts(offset: Int, blog: UiBlog): Single<Posts> {
         return Single.create { emitter ->
             val map = HashMap<String, Int>()
             map["offset"] = offset

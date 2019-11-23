@@ -13,7 +13,6 @@ import demo.nitin.tumblr_android_demo.features.following.FollowingViewModel
 import demo.nitin.tumblr_android_demo.features.likes.LikesRepo
 import demo.nitin.tumblr_android_demo.features.likes.LikesRepoImpl
 import demo.nitin.tumblr_android_demo.features.likes.LikesViewModel
-import demo.nitin.tumblr_android_demo.utils.ImageLoadingUtil
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

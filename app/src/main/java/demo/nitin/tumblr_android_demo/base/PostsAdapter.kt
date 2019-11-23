@@ -48,7 +48,8 @@ class PostsAdapter(
     }
 
     override fun getItemCount(): Int {
-        return if (uiPosts.isNotEmpty() && uiPosts.size % 20 == 0) uiPosts.size + 1 // 1 for the progress bar
+        // 1 for the progress bar
+        return if (uiPosts.isNotEmpty() && uiPosts.size % 20 == 0) uiPosts.size + 1
         else if (uiPosts.size % 20 > 0) uiPosts.size
         else 0
     }

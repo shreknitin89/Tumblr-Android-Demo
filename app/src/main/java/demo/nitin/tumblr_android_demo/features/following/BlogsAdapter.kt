@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import demo.nitin.tumblr_android_demo.R
 import demo.nitin.tumblr_android_demo.base.MainActivity
 import demo.nitin.tumblr_android_demo.base.UiBlog
+import java.util.Locale
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.blog_layout.*
 import kotlinx.android.synthetic.main.progress_layout.*
-import java.util.Locale
 
 class BlogsAdapter(
     private val fragment: Fragment,
@@ -49,7 +49,8 @@ class BlogsAdapter(
     }
 
     override fun getItemCount(): Int {
-        return if (blogs.isNotEmpty() && blogs.size % 20 == 0) blogs.size + 1 // 1 for the progress bar
+        // 1 for the progress bar
+        return if (blogs.isNotEmpty() && blogs.size % 20 == 0) blogs.size + 1
         else if (blogs.size % 20 > 0) blogs.size
         else 0
     }
@@ -86,7 +87,9 @@ class BlogsAdapter(
 
             blog_row?.setOnClickListener {
                 // push fragment
-                (fragment.requireActivity() as? MainActivity)?.pushFragment(BlogPostsFragment.newInstance(blog))
+                (fragment.requireActivity() as? MainActivity)?.pushFragment(
+                    BlogPostsFragment.newInstance(blog)
+                )
             }
         }
     }

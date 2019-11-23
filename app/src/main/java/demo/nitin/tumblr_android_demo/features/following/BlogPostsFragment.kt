@@ -23,7 +23,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class BlogPostsFragment : Fragment() {
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var postsAdapter: PostsAdapter
-    private var blog: UiBlog?=null
+    private var blog: UiBlog? = null
     private val disposable = CompositeDisposable()
     private val followingViewModel: FollowingViewModel by viewModel()
 
@@ -38,7 +38,9 @@ class BlogPostsFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.dashboard_fragment, container, false)
     }
@@ -54,7 +56,7 @@ class BlogPostsFragment : Fragment() {
         post_list?.adapter = postsAdapter
 
         blog?.let {
-            followingViewModel.getBlogPosts(0, it).observe(this, Observer {state ->
+            followingViewModel.getBlogPosts(0, it).observe(this, Observer { state ->
                 refreshData(state)
             })
         }

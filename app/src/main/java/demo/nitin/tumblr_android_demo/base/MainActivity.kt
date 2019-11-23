@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.ncapdevi.fragnav.FragNavController
+import com.ncapdevi.fragnav.FragNavTransactionOptions
 import demo.nitin.tumblr_android_demo.R
 import demo.nitin.tumblr_android_demo.features.dashboard.DashboardFragment
 import demo.nitin.tumblr_android_demo.features.following.FollowingFragment
@@ -53,7 +54,7 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
     }
 
     override fun onBackPressed() {
-        if(!fragNavController.isRootFragment) {
+        if (!fragNavController.isRootFragment) {
             popFragment()
         } else {
             super.onBackPressed()
@@ -61,11 +62,31 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
     }
 
     fun pushFragment(fragment: Fragment) {
-        fragNavController.pushFragment(fragment)
+        val options = FragNavTransactionOptions
+            .newBuilder()
+            .customAnimations(
+                R.anim.enter_from_bottom_animation,
+                0,
+                R.anim.enter_from_bottom_animation,
+                0
+            )
+            .allowStateLoss(false)
+            .build()
+        fragNavController.pushFragment(fragment, options)
     }
 
     fun popFragment() {
-        fragNavController.popFragment()
+        val options = FragNavTransactionOptions
+            .newBuilder()
+            .customAnimations(
+                0,
+                R.anim.exit_to_bottom_animation,
+                0,
+                R.anim.exit_to_bottom_animation
+            )
+            .allowStateLoss(false)
+            .build()
+        fragNavController.popFragment(options)
     }
 
     private fun initNavigationBar() {

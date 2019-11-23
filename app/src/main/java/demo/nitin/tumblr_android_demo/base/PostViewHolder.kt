@@ -5,9 +5,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import demo.nitin.tumblr_android_demo.R
 import demo.nitin.tumblr_android_demo.utils.ImageLoadingUtil
+import java.util.Locale
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.post_layout.*
-import java.util.Locale
 
 class PostViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView),
     LayoutContainer {

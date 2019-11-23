@@ -63,5 +63,4 @@ class FollowingRepoImpl constructor(private val network: Network) : FollowingRep
             Dashboard(ArrayList())
         }
     }
-
 }

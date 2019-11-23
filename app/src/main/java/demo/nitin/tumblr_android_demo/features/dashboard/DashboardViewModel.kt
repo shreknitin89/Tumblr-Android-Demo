@@ -15,9 +15,11 @@ class DashboardViewModel(private val repository: DashboardRepo) : PostsViewModel
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     override fun getNewPosts(offset: Int, blog: UiBlog?) {
-        compositeDisposable.add(repository.getPosts(offset).performOnComputation().subscribe { posts ->
-            PostsStreamFactory.postFetchSuccess(posts.uiPosts)
-        })
+        compositeDisposable.add(repository.getPosts(offset)
+            .performOnComputation()
+            .subscribe { posts ->
+                PostsStreamFactory.postFetchSuccess(posts.uiPosts)
+            })
     }
 
     override fun onCleared() {
