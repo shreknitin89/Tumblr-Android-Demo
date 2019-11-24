@@ -15,18 +15,20 @@ object Android {
     const val testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 }
 
+//TODO: Replace with your keys
 object Keys {
-    const val consumerKey = "lsnTmAkmV50oeGg7oVaOGzg48dmBGr5yS8eViGXxmYTtKdMMyv"
-    const val consumerSecret = "Myw99AKRzK3HdrArDuAGOIKLLHR9I9ucOhTkh7YqLjfmVjDMrr"
-    const val token = "TyKAE4fM1P4vkGTQHa6dD2yAoq77o4chmG4evr3nC7f7vIdR78"
-    const val tokenSecret = "SwXwBkwhuJsoOMI8gLVQiOd7yPbSfF1AMYdrPE5ZOgVJyAEImn"
+    const val consumerKey = "YOUR_CONSUMER_KEY"
+    const val consumerSecret = "YOUR_CONSUMER_SECRET"
+    const val token = "YOUR_TOKEN"
+    const val tokenSecret = "YOUR_TOKEN_SECRET"
 }
 
 object Libs {
     const val appCompat = "1.1.0" // https://mvnrepository.com/artifact/androidx.appcompat/appcompat
     const val androidMaterial = "1.1.0-beta01"
     // https://mvnrepository.com/artifact/com.google.android.material/material
-    const val legacySupport = "1.0.0" // https://mvnrepository.com/artifact/androidx.legacy/legacy-support-v4
+    const val legacySupport =
+        "1.0.0" // https://mvnrepository.com/artifact/androidx.legacy/legacy-support-v4
     const val androidLifeCycle = "2.1.0"
     // https://mvnrepository.com/artifact/androidx.lifecycle/lifecycle-extensions
     const val constraintLayout = "2.0.0-beta2"
