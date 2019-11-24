@@ -13,7 +13,7 @@ import io.reactivex.disposables.CompositeDisposable
 
 class LikesViewModel(private val repository: LikesRepo) : PostsViewModel, ViewModel() {
 
-    private val compositeDisposable: CompositeDisposable = CompositeDisposable()
+    val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     override fun getNewPosts(offset: Int, blog: UiBlog?) {
         compositeDisposable.add(repository.getNewLikes(offset)

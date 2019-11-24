@@ -12,7 +12,7 @@ import demo.nitin.tumblr_android_demo.utils.UiState
 import io.reactivex.disposables.CompositeDisposable
 
 class DashboardViewModel(private val repository: DashboardRepo) : PostsViewModel, ViewModel() {
-    private val compositeDisposable: CompositeDisposable = CompositeDisposable()
+    val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     override fun getNewPosts(offset: Int, blog: UiBlog?) {
         compositeDisposable.add(repository.getPosts(offset)
@@ -28,10 +28,6 @@ class DashboardViewModel(private val repository: DashboardRepo) : PostsViewModel
     }
 
     fun getDashboardPosts(offset: Int): LiveData<UiState<Posts>> {
-        return repository.getPosts(offset).performOnComputation().toLiveData(compositeDisposable)
-    }
-
-    fun getNewDashboardPosts(offset: Int): LiveData<UiState<Posts>> {
         return repository.getPosts(offset).performOnComputation().toLiveData(compositeDisposable)
     }
 }

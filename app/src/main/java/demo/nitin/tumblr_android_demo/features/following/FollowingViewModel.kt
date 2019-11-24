@@ -8,13 +8,14 @@ import demo.nitin.tumblr_android_demo.base.PostsViewModel
 import demo.nitin.tumblr_android_demo.base.UiBlog
 import demo.nitin.tumblr_android_demo.extensions.performOnComputation
 import demo.nitin.tumblr_android_demo.extensions.toLiveData
+import demo.nitin.tumblr_android_demo.utils.BlogsStreamFactory
 import demo.nitin.tumblr_android_demo.utils.PostsStreamFactory
 import demo.nitin.tumblr_android_demo.utils.UiState
 import io.reactivex.disposables.CompositeDisposable
 
 class FollowingViewModel constructor(private val repository: FollowingRepo) : PostsViewModel,
     ViewModel() {
-    private val compositeDisposable: CompositeDisposable = CompositeDisposable()
+    val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     override fun onCleared() {
         super.onCleared()
@@ -25,8 +26,12 @@ class FollowingViewModel constructor(private val repository: FollowingRepo) : Po
         return repository.getBlogs(offset).performOnComputation().toLiveData(compositeDisposable)
     }
 
-    fun getNewBlogs(offset: Int): LiveData<UiState<Blogs>> {
-        return repository.getNewBlogs(offset).performOnComputation().toLiveData(compositeDisposable)
+    fun getNewBlogs(offset: Int) {
+        compositeDisposable.add(repository.getNewBlogs(offset)
+            .performOnComputation()
+            .subscribe { blogs ->
+                BlogsStreamFactory.postFetchSuccess(blogs.uiBlogs)
+            })
     }
 
     fun getBlogPosts(offset: Int, blog: UiBlog): LiveData<UiState<Posts>> {

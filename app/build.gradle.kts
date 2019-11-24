@@ -77,6 +77,9 @@ dependencies {
     implementation("org.koin:koin-android-scope:${Libs.koin}")
     implementation("org.koin:koin-android-viewmodel:${Libs.koin}")
     implementation("org.koin:koin-android-ext:${Libs.koin}")
+    androidTestImplementation("org.koin:koin-test:${Libs.koin}") {
+        exclude("org.mockito")
+    }
 
     // Glide for Image Loading
     kapt("com.github.bumptech.glide:compiler:${Libs.glide}")
@@ -85,7 +88,10 @@ dependencies {
 
     // Unit Tests
     testImplementation("junit:junit:${Libs.junit}")
+    androidTestImplementation("org.mockito:mockito-android:${Libs.mockito}")
+    testImplementation("org.mockito:mockito-core:${Libs.mockito}")
     androidTestImplementation("androidx.test.ext:junit:${Libs.junitExt}")
+    androidTestImplementation("android.arch.core:core-testing:${Libs.junitExt}")
     androidTestImplementation("androidx.test.espresso:espresso-core:${Libs.espresso}")
 }
 

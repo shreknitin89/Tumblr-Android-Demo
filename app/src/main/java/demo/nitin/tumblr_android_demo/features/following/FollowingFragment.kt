@@ -10,13 +10,18 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import demo.nitin.tumblr_android_demo.R
 import demo.nitin.tumblr_android_demo.base.Blogs
+import demo.nitin.tumblr_android_demo.base.UiBlog
+import demo.nitin.tumblr_android_demo.utils.BlogsStreamFactory
+import demo.nitin.tumblr_android_demo.utils.PostsStreamFactory
 import demo.nitin.tumblr_android_demo.utils.UiState
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.dashboard_fragment.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class FollowingFragment : Fragment() {
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var blogsAdapter: BlogsAdapter
+    private val disposable = CompositeDisposable()
     private val blogsViewModel: FollowingViewModel by viewModel()
 
     companion object {
@@ -54,13 +59,25 @@ class FollowingFragment : Fragment() {
                     ).show()
                 }
                 is UiState.Success -> {
-                    it.data?.let { blogs -> updatePosts(blogs) }
+                    it.data?.let { blogs -> updatePosts(blogs.uiBlogs) }
                 }
             }
         })
     }
 
-    private fun updatePosts(blogs: Blogs) {
-        blogsAdapter.setNewData(blogs.uiBlogs)
+    override fun onResume() {
+        super.onResume()
+        disposable.add(BlogsStreamFactory.blogsStream.subscribe {
+            updatePosts(it)
+        })
+    }
+
+    override fun onStop() {
+        super.onStop()
+        disposable.clear()
+    }
+
+    private fun updatePosts(blogs: ArrayList<UiBlog>) {
+        blogsAdapter.setNewData(blogs)
     }
 }
