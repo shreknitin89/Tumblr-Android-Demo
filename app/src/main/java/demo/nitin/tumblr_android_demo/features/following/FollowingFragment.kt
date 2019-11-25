@@ -9,10 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import demo.nitin.tumblr_android_demo.R
-import demo.nitin.tumblr_android_demo.base.Blogs
 import demo.nitin.tumblr_android_demo.base.UiBlog
 import demo.nitin.tumblr_android_demo.utils.BlogsStreamFactory
-import demo.nitin.tumblr_android_demo.utils.PostsStreamFactory
 import demo.nitin.tumblr_android_demo.utils.UiState
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.dashboard_fragment.*

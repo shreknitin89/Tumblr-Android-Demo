@@ -81,11 +81,6 @@ dependencies {
         exclude("org.mockito")
     }
 
-    // Glide for Image Loading
-    kapt("com.github.bumptech.glide:compiler:${Libs.glide}")
-    implementation("com.github.bumptech.glide:glide:${Libs.glide}")
-    implementation("com.github.bumptech.glide:okhttp3-integration:${Libs.glide}")
-
     // Unit Tests
     testImplementation("junit:junit:${Libs.junit}")
     androidTestImplementation("org.mockito:mockito-android:${Libs.mockito}")
